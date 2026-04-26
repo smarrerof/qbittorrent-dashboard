@@ -44,6 +44,7 @@ services:
       - QB_HOST=http://192.168.1.x:8080
       - QB_USER=admin
       - QB_PASS=your_password
+    command: python -m collector.main
     volumes:
       - /path/to/data:/data
     restart: unless-stopped
