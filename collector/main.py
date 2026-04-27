@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 from datetime import datetime, timezone
 
@@ -35,6 +36,9 @@ def collect() -> None:
 
 
 def main() -> None:
+    version = os.getenv("APP_VERSION", "dev")
+    log.info("qBittorrent Dashboard collector v%s starting", version)
+
     init_db()
 
     if "--now" in sys.argv:

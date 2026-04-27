@@ -50,3 +50,11 @@ data/               SQLite database (gitignored, bind-mounted into containers)
 See `.env.example`. Key vars:
 - `QB_HOST`, `QB_USER`, `QB_PASS` — qBittorrent Web UI
 - `DB_PATH` — SQLite path inside container (default `/data/stats.db`)
+
+## Project instructions
+
+- Always ask for permission before creating, editing, or deleting any file.
+- Keep README.md bilingual: any change to the Spanish section must be mirrored in the English section, and vice versa.
+- Commit messages must follow Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `ci:`.
+- Do NOT add "Co-Authored-By: XXX" or any similar co-author trailer to commit messages.
+- When pushing, always use the user's own git credentials — never override or inject different author/committer identity.
