@@ -43,7 +43,7 @@ def main() -> None:
         return
 
     scheduler = BlockingScheduler(timezone="UTC")
-    scheduler.add_job(collect, CronTrigger(hour=0, minute=0))
+    scheduler.add_job(collect, CronTrigger(hour=0, minute=0), misfire_grace_time=3600)
 
     log.info("Scheduler running. Next collection at midnight UTC.")
     scheduler.start()
