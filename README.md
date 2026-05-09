@@ -20,14 +20,22 @@ Edita `.env` con tus credenciales.
 
 ```bash
 docker compose build
+
+# Collector (recoge datos cada día a las 00:00 UTC)
 docker compose up -d collector
+
+# API (disponible en http://localhost:8000)
+docker compose up -d api
 
 # Ver logs
 docker compose logs -f collector
+docker compose logs -f api
 
 # Forzar una colección manualmente
 docker compose run --rm collector python -m collector.main --now
 ```
+
+La documentación interactiva de la API está disponible en `http://localhost:8000/docs`.
 
 ### Publicar una nueva versión
 
@@ -82,14 +90,22 @@ Edit `.env` with your credentials.
 
 ```bash
 docker compose build
+
+# Collector (collects data every day at 00:00 UTC)
 docker compose up -d collector
+
+# API (available at http://localhost:8000)
+docker compose up -d api
 
 # View logs
 docker compose logs -f collector
+docker compose logs -f api
 
 # Trigger a manual collection
 docker compose run --rm collector python -m collector.main --now
 ```
+
+Interactive API documentation is available at `http://localhost:8000/docs`.
 
 ### Publishing a new release
 

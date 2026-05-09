@@ -8,14 +8,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Build images (uses Dockerfile.dev)
 docker compose build
 
-# Run collector 24/7 (production)
+# Run collector 24/7
 docker compose up -d collector
 
-# Trigger a manual collection (development)
+# Run API (hot-reload enabled)
+docker compose up api
+
+# Trigger a manual collection
 docker compose run --rm collector python -m collector.main --now
 
 # Logs
 docker compose logs -f collector
+docker compose logs -f api
+```
+
+### Run the API locally (without Docker)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+DB_PATH=./data/stats.db uvicorn api.main:app --reload
+# http://localhost:8000/api/stats/summary
+# http://localhost:8000/docs  ← Swagger UI
 ```
 
 ## Architecture
@@ -32,7 +48,11 @@ collector/          Python package — runs 24/7 via APScheduler
   clients/
     qbittorrent.py  Fetches upload stats from qBittorrent Web API v2
 
-api/                (planned) FastAPI
+api/                FastAPI — GET /api/stats/summary (daily upload totals)
+  main.py           App entry point, CORS, startup logging
+  db.py             Read-only SQLite queries (aiosqlite)
+  routers/
+    stats.py        GET /api/stats/summary?from=YYYY-MM-DD&to=YYYY-MM-DD
 frontend/           (planned) Angular
 data/               SQLite database (gitignored, bind-mounted into containers)
 ```
